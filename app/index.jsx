@@ -1,14 +1,46 @@
 import { StatusBar } from 'expo-status-bar';
-import { Text, View } from 'react-native';
-import { Link } from 'expo-router';
+import { ScrollView, Text, View, Image } from 'react-native';
+import { Redirect, router } from 'expo-router';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
+import logo from '../assets/images/logito.png'
+import CustomButton from '../components/CustomButton';
 
 export default function App() {
   return (
-    <View className="flex-1 items-center justify-center bg-white">
-      <Text className="text-3xl font-pthin">EmpleaNet</Text>
-      <StatusBar style="auto" />
-      <Link href="/home" style={{color:'blue'}}>Go to Home</Link>
-    </View>
+    
+    <SafeAreaView className= "bg-secondary h-full">
+      <ScrollView contentContainerStyle={{flexGrow: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <View className= "w-full items-center px-4"> 
+
+          <Image
+            source={logo}
+            className= "w-[700px] h-[150px]"
+            resizeMode='contain'
+          />
+
+        </View>
+
+        <View className= "relative mt-5">
+          <Text className= "text-2xl text-white font-pmedium text-center">
+          Bienvenido a EmpleoNet!
+          </Text>
+          
+        </View>
+
+        <View >
+          <CustomButton 
+            title= "Sign in"
+            handlePress={() => router.push('/sign-in')}
+            containerStyles= "w-full mt-7 w-32"
+          />
+        </View>
+      </ScrollView>
+
+      <StatusBar backgroundColor='#46739D'
+      style='black'/>
+
+    </SafeAreaView>
   );
 }
 
