@@ -1,6 +1,6 @@
 import { View, Text, ScrollView, Image } from 'react-native'
 import React, { useState } from 'react'
-import { Redirect, router } from 'expo-router'
+import { Link, Redirect, router } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 import logo from '../../assets/images/logito.png'
@@ -43,11 +43,16 @@ const SignIn = () => {
               password: p })}
             otherStyles= "mt-7"
           />
-          <CustomButton 
+          <View className="items-center">
+            <CustomButton 
             title={"Acceder"}
             handlePress={() => router.push('/home')}
             containerStyles= "w-full mt-7 w-32"
-          />
+            />
+            <Text className='mt-3 font-pmedium text-white'>¿No tienes cuenta?</Text>
+            <Link href={'../sign-up'} className='mt-1 font-plight text-white opacity-60'>Registrate</Link>
+          </View>
+          
         </View>  
           
       </ScrollView>
