@@ -44,7 +44,7 @@ const SignIn = () => {
             otherStyles= "mt-7"
           />
           <CustomButton 
-            title={"Ingresar"}
+            title={"Acceder"}
             handlePress={() => router.push('/home')}
             containerStyles= "w-full mt-7 w-32"
           />
