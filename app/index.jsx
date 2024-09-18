@@ -25,6 +25,9 @@ export default function App() {
           <Text className= "text-2xl text-white font-pmedium text-center">
           Bienvenido a EmpleoNet!
           </Text>
+          <Text className= "text-l text-white font-plight text-center mt-2">
+          Encuentra al experto que necesitas, al instante
+          </Text>
           
         </View>
 

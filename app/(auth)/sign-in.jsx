@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { Link, Redirect, router } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
-import logo from '../../assets/images/logito.png'
+import images from '../../constants/images'
 import FormField from '../../components/FormField'
 import CustomButton from '../../components/CustomButton'
 
@@ -13,19 +13,27 @@ const SignIn = () => {
     password: ''
   })
 
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const submit = () => {
+
+  }
+
   return (
     <SafeAreaView className= "bg-secondary h-full">
       <ScrollView>
-        <View className="w-full justify-center h-full px-4 my-6">
-        <Image
-            source={logo}
-            className= "w-[115px] h-[100px]"
-            resizeMode='contain'
-          />
-           <Text className= "text-xl font-psemibold text-white"> 
-            Inicia Sesion en EmpleoNet
-           </Text>
-           <Text className= "text-l font-pmedium text-white mt-1">para buscar un servicio</Text>
+        <View className="w-full justify-center min-h-[85vh] px-4 my-6">
+          <View className='items-center'>
+            <Image
+              source={images.logob}
+              className= 'w-[200px] h-[150px] '
+              resizeMode='contain'
+            />
+            <Text className= "text-xl font-psemibold text-white"> 
+              Inicia Sesion en EmpleoNet
+            </Text>
+            <Text className= "text-l font-pmedium text-white mt-1">para buscar un servicio</Text>
+          </View>
           
           <FormField 
             title= "Email"
@@ -44,13 +52,18 @@ const SignIn = () => {
             otherStyles= "mt-7"
           />
           <View className="items-center">
+            
             <CustomButton 
             title={"Acceder"}
-            handlePress={() => router.push('/home')}
+            handlePress={submit}
             containerStyles= "w-full mt-7 w-32"
+            isLoading={isSubmitting}
             />
-            <Text className='mt-3 font-pmedium text-white'>¿No tienes cuenta?</Text>
-            <Link href={'../sign-up'} className='mt-1 font-plight text-white opacity-60'>Registrate</Link>
+
+            <View className='items-center'>
+              <Text className='mt-3 font-pregular text-white'>¿No tienes cuenta?</Text>
+              <Link href={'../sign-up'} className='mt-1 font-pbold text-blue opacity-60'>Registrate</Link>
+            </View>
           </View>
           
         </View>  
