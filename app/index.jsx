@@ -5,8 +5,13 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import logo from '../assets/images/logito.png'
 import CustomButton from '../components/CustomButton';
+import { useGlobalContext } from '../context/GlobalProvider';
 
 export default function App() {
+  const {isLoading, isLoggedIn} = useGlobalContext();
+
+  if(!isLoading && isLoggedIn) return <Redirect href='/home'/>
+
   return (
     
     <SafeAreaView className= "bg-secondary h-full">

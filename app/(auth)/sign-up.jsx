@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, Image } from 'react-native'
+import { View, Text, ScrollView, Image, Alert } from 'react-native'
 import React, { useState } from 'react'
 import { Link, Redirect, router } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -6,17 +6,41 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import images from '../../constants/images'
 import FormField from '../../components/FormField'
 import CustomButton from '../../components/CustomButton'
+import  { createUser }  from '../../lib/appwrite'
+import { useGlobalContext } from '../../context/GlobalProvider';
 
 const SignUp = () => {
+  const { setUser, setIsLogged } = useGlobalContext();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [form, setForm] = useState({
     username: '',
     email: '',
     password: ''
   })
 
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  
 
-  const submit = () => {
+  const submit = async () => {
+    if(!form.username|| !form.email ||!form.password)
+    {
+      Alert.alert('Error', 'Toda la información es necesaria')
+    }
+    setIsSubmitting(true);
+    try {
+      const result = await createUser(form.email, form.password, form.username)
+      setUser(result);
+      setIsLogged(true);
+
+      router.replace('/home')
+
+    } catch (error) {
+      Alert.alert('Error', error.message)
+      
+    }finally{
+      setIsSubmitting(false)
+
+    }
+    createUser();
 
   }
 
@@ -39,7 +63,7 @@ const SignUp = () => {
             title= "Username"
             value={form.username}
             handleChangeText={(e) => setForm({...form,
-              email: e })}
+              username: e })}
             otherStyles= "mt-7"
           />
           

@@ -16,7 +16,8 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "package" : "com.team24.empleonet"
     },
     "android": {
       "adaptiveIcon": {
