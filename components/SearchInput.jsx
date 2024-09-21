@@ -7,14 +7,14 @@ const SearchInput = ({title, value, placeholder, handleChangeText,
     const [showPassword, setshowPassword] = useState(false)
   return (
 
-      <View className="rounded-2xl w-full h-16 px-4 bg-blue-100 border-2 focus:border-primary 
+      <View className="rounded-2xl w-full h-16 px-4 bg-secondary-300 
       items-center flex-row space-x-4">
 
         <TextInput 
           className= "text-base mt-0.5 text-white flex-1 font-pregular"
           value={value}
           placeholder="Busca un provedor de servicios"
-          placeholderTextColor="#7b7b8b"
+          placeholderTextColor="#adabac"
           onChangeText={handleChangeText}
           secureTextEntry={title === 'Password' && !showPassword}
         />

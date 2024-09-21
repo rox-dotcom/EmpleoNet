@@ -6,12 +6,13 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import images from '../../constants/images'
 import FormField from '../../components/FormField'
 import CustomButton from '../../components/CustomButton'
-import { signIn } from '../../lib/appwrite'
+import { getCurrentUser, signIn,  checkActiveSession, deleteSessions} from '../../lib/appwrite'
 import { useGlobalContext } from '../../context/GlobalProvider';
 
 const SignIn = () => {
-  const {setUser, setIsLoggedIn} = useGlobalContext()
+  const {setUser, setIsLogged} = useGlobalContext()
   const [isSubmitting, setIsSubmitting] = useState(false)
+  
   const [form, setForm] = useState({
     email: '',
     password: ''
@@ -22,13 +23,26 @@ const submit = async () => {
     if(!form.email ||!form.password)
     {
       Alert.alert('Error', 'Toda la información es necesaria')
+      return;
     }
+
     setIsSubmitting(true);
     try {
-      await signIn(form.email, form.password)
-      setUser(result);
-      setIsLoggedIn(true);
+      //Check for active sessions
+      const activeSession = await checkActiveSession();
+      
+      //delete if theres an active session
+      if (activeSession) {
+        await deleteSessions();
+      }
 
+      //proceed with sing-in
+      await signIn(form.email, form.password)
+      const result = await getCurrentUser();
+      setUser(result);
+      setIsLogged(true);
+
+      Alert.alert("Suceess","We are logged in!!")
       router.replace('/home')
 
     } catch (error) {

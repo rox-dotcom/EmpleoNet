@@ -1,30 +1,74 @@
-import { SafeAreaView, Text, View, Image, ScrollView } from 'react-native'
-import React from 'react'
+import { SafeAreaView, Text, View, Image, ScrollView, FlatList, TouchableOpacity } from 'react-native'
+import {useState} from 'react'
 
-import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import coser from '../../assets/images/coser.jpg'
 import carpo from '../../assets/images/carpi.jpg'
+import { useGlobalContext } from '../../context/GlobalProvider';
+import icons from '../../constants/icons'
+import InfoBox from '../../components/InfoBox';
+import { signOut } from '../../lib/appwrite';
+
+import {router} from 'expo-router'
 
 const Profile = () => {
+
+  const {user, setUser, setIsLogged} = useGlobalContext();
+
+  const logout = async () => {
+    await signOut();
+    setUser(null);
+    setIsLogged(false);
+
+    router.replace("/sign-in");
+  };
+
   return (
     <>
     <SafeAreaView className="bg-secondary-100 h-full">
-      <ScrollView>
-      <View className="flex-1 ml-3 mt-5">
-        <View className= "flex-row p-4">
-          <FontAwesome5 name="user-alt" size={50} color="white" />
-          <Text className="mt-5 ml-5 text-center text-white font-pmedium text-2xl">
-            Fulanito Gonzalez
-          </Text>
-        </View>
-      </View>
-      <View>
-        <Text className="text-white mt-5 ml-2 text-m">
-          Servicios previamente adquiridos
-        </Text>
+      <FlatList 
+        ListHeaderComponent={()=> (
+          <View className= "w-full justify-center items-center mt-6 mb-12 px-6">
+              <TouchableOpacity 
+                onPress={logout}
+                className="w-full items-end mb-10"
+                
+                >
+                <Image 
+                  source={icons.logout}
+                  resizeMode='contain'
+                  className= "w-6 h-6"
+                />
+              </TouchableOpacity>
+              <View className= "w-16 h-16 border boder-secondary rounded-lg justify-center items-center">
+                <Image 
+                  source={{uri: user?.avatar}}
+                  className = "w-[90%] h-[90%] rounded-lg"
+                  resizeMode='cover'
+                />
+              </View>
 
-      </View>
+              <InfoBox 
+                title={user?.username || "UserName"}
+                containerStyles='mt-5'
+                titleStyles='text-lg'
+              />
+
+              {/*<View className="mt-5 flex-row">
+                <InfoBox 
+                  title = {user?.username}
+                  containerStyles='mt-5'
+                  titleStyles = 'text-lg'
+                />
+              </View>*/}
+          </View>
+        )}
+      
+      />
+        
+      
+      <ScrollView>
       <View className="flex-1 justify-center items-center">
+        <Text className="text-white font-pregular">Servicios previamente adquiridos</Text>
         <View className="flex-row items-center p-4">
           <Image 
               source={coser}

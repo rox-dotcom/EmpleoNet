@@ -20,7 +20,7 @@ const Home = () => {
     setRefreshing(false);
   }
   
-  console.log(posts);
+  //console.log(posts);
   return (
     <>
     <SafeAreaView className="bg-secondary-100">
@@ -32,8 +32,18 @@ const Home = () => {
           )}
           ListHeaderComponent={()=> (
             <View className="my-6 px-4 space-y-5">
-              <View className="justify-between items-start flex-row mb-6">
-                <View>
+              <View className=" items-start flex-row mb-6">
+              
+              <View className="mt-1.5">
+                  <Image 
+                    source={logo}
+                    className= "w-20 h-20"
+                    resizeMode='contain'
+                  />
+                  
+                </View>
+
+                <View  className="mt-4 ml-5 ">
                   <Text className="font-pmedium text-sm text-gray-100">
                     Bienvenido de vuelta
                   </Text>
@@ -41,24 +51,15 @@ const Home = () => {
                     Fulanito!
                   </Text>
                 </View>
-
-                <View className="mt-1.5">
-                  <Image 
-                    source={logo}
-                    className= "w-25 h-20"
-                    resizeMode='contain'
-                  />
-                  
-                </View>
+                
               </View>
 
               <SearchInput />
-              <View className= "w-full flex-1 pt-3 pb-8">
+              <View className= "w-full flex-1 pt-2 pb-3">
                 <Text className="text-gray-100 text-lg font-pregular">
                   Conoce nuestros servicios...
                 </Text>
-
-                <Trending posts={[{id:1},{id:2},{id:3}] ?? []}/>
+                {/*<Trending posts={[{id:1},{id:2},{id:3}] ?? []}/>*/}
               </View>
             </View>
           )}

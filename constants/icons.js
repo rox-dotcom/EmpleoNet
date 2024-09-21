@@ -3,7 +3,8 @@ import home from '../assets/icons/home.png';
 import profile from '../assets/icons/user.png';
 import view from '../assets/images/view.png';
 import hide from '../assets/images/hide.png';
-import menu from '../assets/icons/menu.png'
+import menu from '../assets/icons/menu.png';
+import logout from '../assets/icons/logout.png'
 
 export default{
     bookmark,
@@ -12,4 +13,5 @@ export default{
     view,
     hide,
     menu,
+    logout,
 };
