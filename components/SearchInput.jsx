@@ -1,25 +1,34 @@
-import { Image, View, Text, TextInput, Touchable, TouchableOpacity } from 'react-native'
+import { View, TextInput, TouchableOpacity, Alert } from 'react-native'
 import { useState } from 'react'
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { router, usePathname } from 'expo-router';
 
-const SearchInput = ({title, value, placeholder, handleChangeText, 
-  otherStyles, ...props}) => {
-    const [showPassword, setshowPassword] = useState(false)
+const SearchInput = ({initialQuery}) => {
+    const pathname = usePathname()
+    const [query, setQuery] = useState(initialQuery || '')
+    
   return (
-
+      
       <View className="rounded-2xl w-full h-16 px-4 bg-secondary-300 
       items-center flex-row space-x-4">
 
         <TextInput 
           className= "text-base mt-0.5 text-white flex-1 font-pregular"
-          value={value}
+          value={query}
           placeholder="Busca un provedor de servicios"
-          placeholderTextColor="#adabac"
-          onChangeText={handleChangeText}
-          secureTextEntry={title === 'Password' && !showPassword}
+          placeholderTextColor="#ffffff"
+          onChangeText={(e) => setQuery(e)}
         />
 
-        <TouchableOpacity>
+        <TouchableOpacity 
+          onPress={()=> {
+            if(!query){
+              return Alert.alert('Missing query', 'Por favor ingresa algo para buscar')
+            }
+            if(pathname.startsWith('/search')) router.setParams({ query })
+            else router.push(`/search/${query}`)  
+          }}
+        >
             <FontAwesome name="search" size={24} color="black" />
         </TouchableOpacity>
 
