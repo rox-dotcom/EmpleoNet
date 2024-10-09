@@ -1,19 +1,21 @@
 import { View, Text, SafeAreaView, FlatList, Image, RefreshControl, Alert } from 'react-native'
-import {useEffect, useState} from 'react'
+import {useState} from 'react'
 import logo from '../../assets/images/logito.png'
 import SearchInput from '../../components/SearchInput'
-import Trending from '../../components/Trending'
 import { getAllPosts } from '../../lib/appwrite'
 import useAppwerite from '../../lib/useAppwrite'
 import ServiceCard from '../../components/ServiceCard'
-
-
+import { useGlobalContext } from '../../context/GlobalProvider'
+import EmptyState from '../../components/EmptyState'
 
 const Home = () => {
+  const {user, setUser, setIsLoggedIn} = useGlobalContext();
+  
   const {data: posts, refetch, } = useAppwerite(getAllPosts);
-
   const [refreshing, setRefreshing] = useState(false)
 
+
+  //console.log(posts)
   const onRefresh = async () => {
     setRefreshing(true);
     await refetch();
@@ -45,10 +47,10 @@ const Home = () => {
 
                 <View  className="mt-4 ml-5 ">
                   <Text className="font-pmedium text-sm text-gray-100">
-                    Bienvenido de vuelta
+                    Bienvenido de vuelta,
                   </Text>
                   <Text className="text-2xl font-psemibold text-white">
-                    Fulanito!
+                    {user?.username}
                   </Text>
                 </View>
                 
@@ -64,6 +66,14 @@ const Home = () => {
             </View>
           )}
           
+          ListEmptyComponent={() => (
+            <EmptyState
+              title= "No tenemos servicios de momento.." 
+              subtitle= "Estamos esperando a que nuevos proveedores se unan"
+            />
+          )}
+          
+
           refreshControl={<RefreshControl refreshing= {refreshing} onRefresh={onRefresh} />}
       />
     </SafeAreaView>

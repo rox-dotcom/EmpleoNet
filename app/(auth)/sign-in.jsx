@@ -39,6 +39,7 @@ const submit = async () => {
       //proceed with sing-in
       await signIn(form.email, form.password)
       const result = await getCurrentUser();
+      
       setUser(result);
       setIsLogged(true);
 

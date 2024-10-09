@@ -19,6 +19,7 @@ const TabsLayout = () => {
         name="home"
         options={{
           title: 'Home',
+          headerShown: false,
           tabBarIcon: ({ color }) => <FontAwesome size={28} name="home" color={color} />,
         }}
       />
@@ -26,6 +27,7 @@ const TabsLayout = () => {
         name="chat"
         options={{
           title: 'Messages',
+          headerShown: false,
           tabBarIcon: ({ color }) => <FontAwesome size={28} name= "inbox" color={color} />,
         }}
       />
@@ -33,6 +35,7 @@ const TabsLayout = () => {
         name="profile"
         options={{
           title: 'User',
+          headerShown: false,
           tabBarIcon: ({ color }) => <FontAwesome size={28} name="user" color={color} />,
         }}
       />

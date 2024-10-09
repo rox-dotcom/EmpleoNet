@@ -1,8 +1,8 @@
-import { View, Text, Image, Touchable, TouchableOpacity } from 'react-native'
+import { View, Text, Image, TouchableOpacity } from 'react-native'
 import icons from '../constants/icons';
 import React from 'react'
 
-const ServiceCard = ({service: {title, description, image_service, users:{username, avatar} }}) => {
+const ServiceCard = ({service: {title, description, image_service, proovedor:{username, avatar} }}) => {
   return (
     <View className= "flex-col items-center px-4 mb-14">
       <View className= "flex-row gap-3 items-start">

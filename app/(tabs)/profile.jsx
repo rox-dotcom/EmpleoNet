@@ -1,18 +1,17 @@
-import { SafeAreaView, Text, View, Image, ScrollView, FlatList, TouchableOpacity } from 'react-native'
-import {useState} from 'react'
-
-import coser from '../../assets/images/coser.jpg'
-import carpo from '../../assets/images/carpi.jpg'
+import { SafeAreaView, View, Image, FlatList, TouchableOpacity } from 'react-native'
 import { useGlobalContext } from '../../context/GlobalProvider';
 import icons from '../../constants/icons'
 import InfoBox from '../../components/InfoBox';
-import { signOut } from '../../lib/appwrite';
-
+import { getUserService, signOut } from '../../lib/appwrite';
+import EmptyState from '../../components/EmptyState';
 import {router} from 'expo-router'
+import useAppwerite from '../../lib/useAppwrite';
+import ServiceCard from '../../components/ServiceCard';
 
 const Profile = () => {
 
   const {user, setUser, setIsLogged} = useGlobalContext();
+  const {data: posts} = useAppwerite(() => getUserService(user.$id))
 
   const logout = async () => {
     await signOut();
@@ -26,6 +25,12 @@ const Profile = () => {
     <>
     <SafeAreaView className="bg-secondary-100 h-full">
       <FlatList 
+        data={posts}
+        keyExtractor={(item) => item.$id}
+        renderItem={({item}) => (
+          <ServiceCard service={item}/>
+        )}
+
         ListHeaderComponent={()=> (
           <View className= "w-full justify-center items-center mt-6 mb-12 px-6">
               <TouchableOpacity 
@@ -53,59 +58,26 @@ const Profile = () => {
                 titleStyles='text-lg'
               />
 
-              {/*<View className="mt-5 flex-row">
+              <View className="mt-5 flex-row">
                 <InfoBox 
-                  title = {user?.username}
+                  title = {posts.length || 0}
+                  subtitle = "Servicios adquiridos"
                   containerStyles='mt-5'
                   titleStyles = 'text-lg'
                 />
-              </View>*/}
+              </View>
           </View>
+        )}
+        ListEmptyComponent={() => (
+          <EmptyState
+            title= "No hay resultados..." 
+            subtitle= "Todavía no pides ningún servicio"
+          />
         )}
       
       />
         
       
-      <ScrollView>
-      <View className="flex-1 justify-center items-center">
-        <Text className="text-white font-pregular">Servicios previamente adquiridos</Text>
-        <View className="flex-row items-center p-4">
-          <Image 
-              source={coser}
-              className="w-60 h-60 mt-5"
-              resizeMode='contain'
-            />
-            <View className="flex-col space-y-4">
-              <Text className= " text-lg text-white font-plight text-xl">
-                Costurera        
-              </Text>
-              <Text className= " text-white font-plight text-sm">
-                Servicio de costura   
-              </Text> 
-              <Text className= " text-white font-plight text-sm"> en Zapopan </Text>
-            </View>            
-        </View>
-
-        <View className="flex-row items-center p-4">
-          <Image 
-              source={carpo}
-              className="w-60 h-60 mt-5"
-              resizeMode='contain'
-            />
-            <View className=" ml-2 flex-col space-y-4">
-              <Text className= " text-lg text-white font-plight text-xl">
-                Carpintero        
-              </Text>
-              <Text className= " text-white font-plight text-sm">
-                10 años de experiencia
-              </Text> 
-              <Text className= " text-white font-plight text-sm"> en Guadalajara </Text>
-            </View>
-            
-            
-        </View>        
-      </View>
-      </ScrollView>
     </SafeAreaView>
     </>
   )
