@@ -1,17 +1,21 @@
-import { View, Text, Image } from 'react-native'
-import { Tabs, Redirect } from 'expo-router';
+import { Tabs } from 'expo-router';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import ChatScreen from '../screen/ChatScreen'
+import MessageScreen from '../screen/MessageScreen'
+import { TouchableOpacity } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 const TabsLayout = () => {
   return (
-    
-    <Tabs screenOptions={{ 
+    <Tabs 
+      screenOptions={{ 
       tabBarActiveTintColor: '#CEE5F2',
       tabBarStyle: {
         backgroundColor: '#1E1E48',
         borderTopWidth: 1,
         borderTopColor: '#CEE5F2'
-      }
+      }, 
+
       
       }}
     >
@@ -26,11 +30,19 @@ const TabsLayout = () => {
       <Tabs.Screen
         name="chat"
         options={{
-          title: 'Messages',
-          headerShown: false,
-          tabBarIcon: ({ color }) => <FontAwesome size={28} name= "inbox" color={color} />,
+          title: 'Inbox',
+          tabBarIcon: ({ color }) => <FontAwesome size={28} name= "inbox" color={color} />, 
+          headerLeft: () => (
+            <TouchableOpacity className= 'ml-3'>
+              <Ionicons
+                name="ellipsis-horizontal-outline"
+                size={30}
+              />
+            </TouchableOpacity>
+          ),
         }}
       />
+
       <Tabs.Screen
         name="profile"
         options={{
@@ -42,5 +54,13 @@ const TabsLayout = () => {
     </Tabs>
   );
 }
+
+const MessageStack = ({navigation}) => (
+  <Stack.Navigator>
+      <Stack.Screen name='Messages' component={MessageScreen} />
+      <Stack.Screen name='Chat' component={ChatScreen}/>
+
+  </Stack.Navigator>
+);
 
 export default TabsLayout

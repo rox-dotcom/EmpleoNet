@@ -1,40 +1,41 @@
-import { View, Text, FlatList, TouchableOpacity } from 'react-native';
-import React from 'react';
+import { View, ActivityIndicator } from 'react-native';
+import React, {useState, useEffect} from 'react';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { SafeAreaView } from 'react-native-safe-area-context';
-
-const contacts = [
-  { id: '1', name: 'Ana' },
-  { id: '2', name: 'Carlos' },
-  { id: '3', name: 'Lucía' },
-  { id: '4', name: 'Pedro' },
-];
-
-const ContactItem = ({ name }) => {
-  return (
-    <View className="flex-row items-center justify-between p-4 border-b border-gray-200">
-      <View className="flex-row items-center ">
-        <MaterialIcons name="person-outline" size={24} color="black" />
-        <Text className=" text-white ml-2 text-lg">{name}</Text>
-      </View>
-      <TouchableOpacity>
-        <MaterialIcons name="message" size={24} color="blue" />
-      </TouchableOpacity>
-    </View>
-  );
-};
+import { StatusBar } from 'expo-status-bar';
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import ChatList from '../../components/ChatList';
+import { getUsersChat } from '../../lib/appwrite';
+import { useGlobalContext } from '../../context/GlobalProvider';
 
 const Chat = () => {
+  const {user, setUser} = useGlobalContext();
+  const [users, setUsers] = useState([1,2,3])
+
+  useEffect(() => {
+    if(user?.uid)
+      getUsersChat();
+
+  }, [])
+  
+
+
   return (
-    <SafeAreaView className="bg-secondary-100 h-full">
-      <View className="flex-1 items-center justify-center">
-      <Text className="text-white text-lg font-bold mb-4">Contactos</Text>
-      <FlatList
-        data={contacts}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <ContactItem name={item.name} />}
-      />
-    </View>
+    <SafeAreaView className="bg-primary h-full">
+      <View className="flex-1 ">
+        <StatusBar style='light'/>
+
+        {
+          users.length> 0? (
+            <ChatList users= {users} />
+          ):(
+            <View className= "flex items-center" style={{top: hp(30)}}> 
+              <ActivityIndicator size="large" />
+            </View>
+          )
+        }
+
+      </View>
     </SafeAreaView>
     
   );
