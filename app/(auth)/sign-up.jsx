@@ -8,6 +8,7 @@ import FormField from '../../components/FormField'
 import CustomButton from '../../components/CustomButton'
 import  { createUser }  from '../../lib/appwrite'
 import { useGlobalContext } from '../../context/GlobalProvider';
+import CustomKeyboardView from '../../components/CustomKeyboardView'
 
 const SignUp = () => {
   const { setUser, setIsLogged } = useGlobalContext();
@@ -47,7 +48,7 @@ const SignUp = () => {
 
   return (
     <SafeAreaView className= "bg-secondary h-full">
-      <ScrollView>
+      <CustomKeyboardView>
         <View className="w-full justify-center min-h-[85vh] px-4 my-6">
           <View className='items-center'>
             <Image
@@ -99,9 +100,8 @@ const SignUp = () => {
             </View>
           </View>
           
-        </View>  
-          
-      </ScrollView>
+        </View>
+      </CustomKeyboardView>
     </SafeAreaView>
   )
 }
