@@ -4,13 +4,15 @@ import ChatItem from './ChatItem'
 import { useRouter } from 'expo-router'
 
 export default function ChatList({users}) {
+    //console.log('received on Chatlist: ', users)
     const router = useRouter();
+
   return (
     <View className='flex-1'>
       <FlatList
         data={users}
         contentContainerStyle={{flex:1, paddingVertical:25}}
-        keyExtractor={item=>Math.random()}
+        keyExtractor={(item) => item.$id}
         showVerticalScrollIndicator={false}
         renderItem={({item, index})=> <ChatItem 
                                         noBorder={index+1 == users.length} 

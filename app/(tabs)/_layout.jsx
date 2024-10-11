@@ -1,7 +1,5 @@
 import { Tabs } from 'expo-router';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import ChatScreen from '../screen/ChatScreen'
-import MessageScreen from '../screen/MessageScreen'
 import { TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -51,16 +49,9 @@ const TabsLayout = () => {
           tabBarIcon: ({ color }) => <FontAwesome size={28} name="user" color={color} />,
         }}
       />
+      
     </Tabs>
   );
 }
-
-const MessageStack = ({navigation}) => (
-  <Stack.Navigator>
-      <Stack.Screen name='Messages' component={MessageScreen} />
-      <Stack.Screen name='Chat' component={ChatScreen}/>
-
-  </Stack.Navigator>
-);
 
 export default TabsLayout

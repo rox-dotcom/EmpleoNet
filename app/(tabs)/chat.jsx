@@ -7,18 +7,19 @@ import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import ChatList from '../../components/ChatList';
 import { getUsersChat } from '../../lib/appwrite';
 import { useGlobalContext } from '../../context/GlobalProvider';
+import useAppwerite from '../../lib/useAppwrite';
 
 const Chat = () => {
   const {user, setUser} = useGlobalContext();
-  const [users, setUsers] = useState([1,2,3])
+  const [users, setUsers] = useState([])
 
-  useEffect(() => {
-    if(user?.uid)
-      getUsersChat();
-
-  }, [])
+  const{data: vendedores } = useAppwerite(getUsersChat) 
   
-
+  useEffect(() => {
+    if (vendedores) {
+      setUsers(vendedores);  
+    }
+  }, [vendedores]);
 
   return (
     <SafeAreaView className="bg-primary h-full">
