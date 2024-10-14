@@ -2,7 +2,7 @@ import { SafeAreaView, View, Image, FlatList, TouchableOpacity } from 'react-nat
 import { useGlobalContext } from '../../context/GlobalProvider';
 import icons from '../../constants/icons'
 import InfoBox from '../../components/InfoBox';
-import { getUserService, signOut } from '../../lib/appwrite';
+import { getAllPosts, getUserService, signOut } from '../../lib/appwrite';
 import EmptyState from '../../components/EmptyState';
 import {router} from 'expo-router'
 import useAppwerite from '../../lib/useAppwrite';
@@ -11,7 +11,8 @@ import ServiceCard from '../../components/ServiceCard';
 const Profile = () => {
 
   const {user, setUser, setIsLogged} = useGlobalContext();
-  const {data: posts} = useAppwerite(() => getUserService(user.$id))
+  const {data: posts} = useAppwerite(getAllPosts);
+  //()=>getUserService(user.$id)
 
   const logout = async () => {
     await signOut();
@@ -24,13 +25,13 @@ const Profile = () => {
   return (
     <>
     <SafeAreaView className="bg-secondary-100 h-full">
-      <FlatList 
+    <FlatList 
         data={posts}
-        keyExtractor={(item) => item.service}
+        keyExtractor={(item) => item.$id}
         renderItem={({item}) => (
-          <ServiceCard service={item}/>
+          <ServiceCard service={item} />
         )}
-
+      
         ListHeaderComponent={()=> (
           <View className= "w-full justify-center items-center mt-6 mb-12 px-6">
               <TouchableOpacity 
@@ -60,7 +61,7 @@ const Profile = () => {
 
               <View className="mt-5 flex-row">
                 <InfoBox 
-                  title = {posts.length || 0}
+                  title = {posts?.length || 0}
                   subtitle = "Servicios adquiridos"
                   containerStyles='mt-5'
                   titleStyles = 'text-lg'

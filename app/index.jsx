@@ -39,7 +39,7 @@ export default function App() {
         <View >
           <CustomButton 
             title= "Sign in"
-            handlePress={() => router.push('/sign-in')}
+            handlePress={() => router.push('/(auth)/sign-in')}
             containerStyles= "w-full mt-7 w-32"
           />
         </View>

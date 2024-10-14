@@ -7,7 +7,7 @@ export default function ChatItem({item, index, router, noBorder}) {
     //const{username, avatar} = item
 
     const openChatRoom = () => {
-        router.push({pathname: '../chatRoom', params:item})
+        router.push({pathname: '/../chatRoom', params:item})
     }
 
     return (

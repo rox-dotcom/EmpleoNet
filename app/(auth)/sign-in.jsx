@@ -13,7 +13,7 @@ import CustomKeyboardView from '../../components/CustomKeyboardView'
 const SignIn = () => {
   const {setUser, setIsLogged} = useGlobalContext()
   const [isSubmitting, setIsSubmitting] = useState(false)
-  
+
   const [form, setForm] = useState({
     email: '',
     password: ''

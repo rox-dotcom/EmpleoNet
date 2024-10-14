@@ -9,19 +9,18 @@ import { useGlobalContext } from '../../context/GlobalProvider'
 import EmptyState from '../../components/EmptyState'
 
 const Home = () => {
-  const {user, setUser, setIsLoggedIn} = useGlobalContext();
+  const {user, setUser, setIsLogged} = useGlobalContext();
   
   const {data: posts, refetch, } = useAppwerite(getAllPosts);
   const [refreshing, setRefreshing] = useState(false)
 
-
-  //console.log(posts)
+  
   const onRefresh = async () => {
     setRefreshing(true);
     await refetch();
     setRefreshing(false);
   }
-  
+  setIsLogged(true);
   //console.log(posts);
   return (
     <>

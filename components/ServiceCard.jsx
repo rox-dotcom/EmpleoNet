@@ -1,6 +1,7 @@
-import { View, Text, Image, TouchableOpacity } from 'react-native'
+import { View, Text, Image, TouchableOpacity, TouchableHighlight } from 'react-native'
 import icons from '../constants/icons';
 import React from 'react'
+import PopUpModal from './PopUpModal';
 
 const ServiceCard = ({service: {title, description, image_service, proovedor:{username, avatar} }}) => {
   return (
@@ -9,10 +10,11 @@ const ServiceCard = ({service: {title, description, image_service, proovedor:{us
         <View className="justify-center items-center flex-row flex-1">
             <View className= "w-[46px] h-[46px] rounded-lg border border-secondary justify-center items-center p-0.5">
                 <Image
-                    source = {{uri: avatar}}
-                    className= "w-full h-full rounded-lg"
-                    resizeMode = 'cover' 
-                />
+                source = {{uri: avatar}}
+                className= "w-full h-full rounded-lg"
+                resizeMode = 'cover' 
+                /> 
+                
             </View>
 
             <View className = "justify-center flex-1 ml-3 gap-y-1">

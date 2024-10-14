@@ -23,6 +23,7 @@ const SearchInput = ({initialQuery}) => {
         <TouchableOpacity 
           onPress={()=> {
             if(!query){
+              
               return Alert.alert('Missing query', 'Por favor ingresa algo para buscar')
             }
             if(pathname.startsWith('/search')) router.setParams({ query })
