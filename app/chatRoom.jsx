@@ -47,12 +47,13 @@ export default function chatRoom() {
         try {
           const response = await getAllChatroomSMS(chatRoom.$id)
           setMessages(response.documents)
+          //console.log(response.documents)
         } catch (error) {
           throw new Error(error)
         }
       }
     };
-    
+
     fetchMessages();
   },[chatRoom]);
 
@@ -61,11 +62,17 @@ export default function chatRoom() {
     if (!message) return;
 
     try {
-      textRef.current = "";
+      textRef.current = '';
       if(inputRef) inputRef?.current?.clear();
+
       const messagecreated= await handleSendSMS(user?.$id, item?.$id, message, chatRoom?.$id);
 
-      console.log(messagecreated?.$id)
+      //console.log(messagecreated?.$id)
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        messagecreated 
+      ]);
+
     } catch (error) {
       Alert.alert('Message', error.message);
     }
@@ -80,7 +87,7 @@ export default function chatRoom() {
 
         <View className= 'flex-1 justify-center bg-neutral-100 overflow-visible'>
           <View className= 'flex-1'>
-            <MessageList messages={messages}/>
+            <MessageList messages={messages} currentUser={user}/>
           </View>
           <View style={{marginBottom: hp(2.7)}} className= 'pt-2'>
               <View className='flex-row mx-3 justify-between bg-white border p-2 border-neutral-300 rounded-full pl-5'>
