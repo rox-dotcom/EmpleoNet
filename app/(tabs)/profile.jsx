@@ -26,7 +26,7 @@ const Profile = () => {
     <SafeAreaView className="bg-secondary-100 h-full">
       <FlatList 
         data={posts}
-        keyExtractor={(item) => item.service.$id}
+        keyExtractor={(item) => item.service}
         renderItem={({item}) => (
           <ServiceCard service={item}/>
         )}
