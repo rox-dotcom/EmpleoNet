@@ -71,7 +71,7 @@ const Profile = () => {
         )}
         ListEmptyComponent={() => (
           <EmptyState
-            title= "No hay resultados..." 
+            title= "No hay resultados...." 
             subtitle= "Todavía no pides ningún servicio"
           />
         )}
