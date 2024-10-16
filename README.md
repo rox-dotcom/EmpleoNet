@@ -8,6 +8,6 @@ In response to Mexico's rising unemployment rates in recent years and the growin
 
 <h4>Prerequisites to run it on your device:</h4>
 <ul>
-  <li>Install the [Expo]{https://docs.expo.dev/router/installation/#manual-installation} dependencies  </li>
-  `npx expo install expo-router react-native-safe-area-context react-native-screens expo-linking expo-constants expo-status-bar`
+  <li>Install the <a href='https://docs.expo.dev/router/installation/#manual-installation'>Expo</a> dependencies </li>
+  <code>npx expo install expo-router react-native-safe-area-context react-native-screens expo-linking expo-constants expo-status-bar</code>
 </ul>
