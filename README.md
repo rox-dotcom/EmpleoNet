@@ -1,0 +1,3 @@
+Hi! Welcome to the EmpleoNet repository...
+
+Prerequisites to run it on your device:
