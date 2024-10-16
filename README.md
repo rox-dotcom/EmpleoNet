@@ -9,9 +9,9 @@
 <h4>Prerequisites to run it on your device:</h4>
 <ul>
   <li> Have at least a Node.js, version v20.9.0 or above, on your computer. </li>
-  <li>Install the <a href='https://docs.expo.dev/router/installation/#manual-installation'>Expo</a> dependencies </li>
+  <li>Install the <a href='https://docs.expo.dev/router/installation/#manual-installation' target="_blank">Expo</a> dependencies </li>
   <code>npx expo install expo-router react-native-safe-area-context react-native-screens expo-linking expo-constants expo-status-bar</code>
-  <li>Install the <a href='https://www.nativewind.dev/v4/getting-started/react-native'>NativeWind</a> framework.</li>
+  <li>Install the <a href='https://www.nativewind.dev/v4/getting-started/react-native' target="_blank">NativeWind</a> framework.</li>
   <code>npm install nativewind@^4.0.1 react-native-reanimated tailwindcss</code>
   <li>Missing the dbconfig...</li>
 </ul>
