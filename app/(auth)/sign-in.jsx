@@ -11,8 +11,9 @@ import { useGlobalContext } from '../../context/GlobalProvider';
 import CustomKeyboardView from '../../components/CustomKeyboardView'
 
 const SignIn = () => {
+  //this value helps us determine which user is logged
   const {setUser, setIsLogged} = useGlobalContext()
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false) //when clicks button
 
   const [form, setForm] = useState({
     email: '',
@@ -21,6 +22,7 @@ const SignIn = () => {
 
 
 const submit = async () => {
+    //check if all the info is in the form
     if(!form.email ||!form.password)
     {
       Alert.alert('Error', 'Toda la información es necesaria')
@@ -38,7 +40,7 @@ const submit = async () => {
       }
 
       //proceed with sing-in
-      await signIn(form.email, form.password)
+      await signIn(form.email, form.password) //talks to db
       const result = await getCurrentUser();
       
       setUser(result);
