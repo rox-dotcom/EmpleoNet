@@ -13,8 +13,10 @@
   <code>npx expo install expo-router react-native-safe-area-context react-native-screens expo-linking expo-constants expo-status-bar</code>
   <li>Install the <a href='https://www.nativewind.dev/v4/getting-started/react-native' target="_blank">NativeWind</a> framework.</li>
   <code>npm install nativewind@^4.0.1 react-native-reanimated tailwindcss</code>
-  <li>Missing the dbconfig..</li>
+  <li>Is missing the dbconfig... You need a .env file with the AppWrite access </li>
 </ul>
+
+<h4>A note... This is developed for iOS</h4>
 
 <h3>With all these steps coverd, we can now see it working in our own machine! </h3>
 <h4>Happy coding!</h4>
